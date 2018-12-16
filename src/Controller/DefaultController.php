@@ -24,10 +24,13 @@ class DefaultController extends AbstractController
 
         $form = $this->createFormBuilder($task)
             ->add('task', TextType::class)
-            ->add('dueDate', DateType::class)
+            ->add('dueDate', DateType::class, array(
+                'widget' => 'single_text',
+                'label'  => 'Due Date',
+                ))
             ->add('save', SubmitType::class, array('label' => 'Create Task'))
             ->getForm();
-            
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
